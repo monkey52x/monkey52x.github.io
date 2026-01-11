@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>X😘WW | О нас</title>
+    <link rel="stylesheet" href="/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-overlay"></div>
+    
+    <header>
+        <nav>
+            <div class="logo" onclick="window.location.href='/'">X😘<span>WW</span></div>
+            <div class="nav-right">
+                <ul class="nav-links">
+                    <li><a href="/" data-link data-lang="nav_home">Главная</a></li>
+                    <li><a href="/fun/" data-link data-lang="nav_fun">Приколы</a></li>
+                    <li><a href="/about/" data-link data-lang="nav_about">О нас</a></li>
+                </ul>
+                <div class="divider"></div>
+                <div class="lang-dropdown">
+                    <button class="lang-btn" id="current-lang" onclick="toggleLangMenu()">RU</button>
+                    <div class="lang-options" id="lang-options">
+                        <span onclick="selectLang('ru')">RU</span>
+                        <span onclick="selectLang('uk')">UA</span>
+                        <span onclick="selectLang('en')">EN</span>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main id="app">
+        <div id="page-content" class="content-fade">
+            <div class="glass-panel about-section">
+                <h1 data-lang="nav_about">О нас</h1>
+                
+                <div class="about-content">
+                    <p data-lang="about_text">
+                        Привет! Я создатель проекта <strong>X😘WW</strong>. 
+                        Этот сайт — мой личный хаб, где собрано всё самое интересное по моим любимым играм: Rust, Minecraft и Unturned.
+                    </p>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-value">52</span>
+                            <span class="stat-label">Projects</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">100%</span>
+                            <span class="stat-label">Passion</span>
+                        </div>
+                    </div>
+
+                    <div class="social-links">
+                        <a href="https://discord.gg/yourlink" class="btn-back">Discord</a>
+                        <a href="https://youtube.com/yourlink" class="btn-back" style="background: #ff0000;">YouTube</a>
+                    </div>
+                </div>
+
+                <a href="/" data-link class="btn-back" style="background: transparent; border: 1px solid var(--border); margin-top: 50px;">
+                    ← На главную
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <script src="/script.js"></script>
+</body>
+</html>
