@@ -4,6 +4,21 @@ const translations = {
     'en': { 'nav_home': 'Home', 'nav_fun': 'Fun', 'nav_about': 'About', 'hero_title': 'Welcome', 'hero_desc': 'Pick a section and let\'s go!', 'about_text': 'Here is information about the XWW project.' }
 };
 
+// Функция для загрузки шапки
+async function initHeader() {
+    const headerElement = document.querySelector('header');
+    if (!headerElement) return;
+
+    try {
+        const response = await fetch('/assets/header.html');
+        const headerHtml = await response.text();
+        headerElement.innerHTML = headerHtml;
+        applyTranslation(localStorage.getItem('selectedLang') || 'ru');
+    } catch (err) {
+        console.error("Ошибка загрузки шапки:", err);
+    }
+}
+
 async function loadPage(url) {
     try {
         const response = await fetch(url);
@@ -12,20 +27,10 @@ async function loadPage(url) {
         const parser = new DOMParser();
         const doc = parser.parseFromString(html, 'text/html');
         
-        // 1. Обновляем контент страницы
-        const newContent = doc.getElementById('page-content');
-        if (newContent) {
-            document.getElementById('page-content').innerHTML = newContent.innerHTML;
-        }
-
-        // 2. ИСПРАВЛЕНИЕ: Если при обновлении пропала шапка, мы берем её из загруженного файла
-        const newHeader = doc.querySelector('header');
-        const currentHeader = document.querySelector('header');
-        if (newHeader && (!currentHeader || currentHeader.innerHTML.trim() === "")) {
-             document.body.insertAdjacentHTML('afterbegin', newHeader.outerHTML);
-        }
-        
+        // Заменяем только контент
+        document.getElementById('page-content').innerHTML = doc.getElementById('page-content').innerHTML;
         document.title = doc.title;
+        
         window.scrollTo(0, 0);
         applyTranslation(localStorage.getItem('selectedLang') || 'ru');
     } catch (err) {
@@ -47,12 +52,17 @@ document.addEventListener('click', e => {
 
 window.addEventListener('popstate', () => loadPage(window.location.pathname));
 
-function toggleLangMenu() { document.getElementById('lang-options').classList.toggle('show'); }
+// Логика языка
+function toggleLangMenu() { 
+    const options = document.getElementById('lang-options');
+    if(options) options.classList.toggle('show'); 
+}
 
 function selectLang(lang) {
     localStorage.setItem('selectedLang', lang);
     applyTranslation(lang);
-    document.getElementById('lang-options').classList.remove('show');
+    const options = document.getElementById('lang-options');
+    if(options) options.classList.remove('show');
 }
 
 function applyTranslation(lang) {
@@ -64,11 +74,14 @@ function applyTranslation(lang) {
     });
 }
 
-window.onload = () => applyTranslation(localStorage.getItem('selectedLang') || 'ru');
+// ПРИ ЗАГРУЗКЕ: сначала загружаем шапку, потом переводим
+window.addEventListener('DOMContentLoaded', () => {
+    initHeader();
+});
+
 window.onclick = e => {
     if (!e.target.matches('.lang-btn')) {
         const dropdown = document.getElementById('lang-options');
         if (dropdown) dropdown.classList.remove('show');
     }
 }
-
