@@ -57,9 +57,25 @@ nav { display: flex; justify-content: space-between; align-items: center; }
 .logo span { color: var(--accent); }
 
 .nav-right { display: flex; align-items: center; gap: 20px; }
-.nav-links { list-style: none; display: flex; gap: 25px; }
-.nav-links a { text-decoration: none; color: var(--text); font-size: 14px; font-weight: 600; transition: 0.3s; }
-.nav-links a:hover { color: var(--accent); }
+.nav-links a {
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: var(--accent);
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
 
 .divider { width: 1px; height: 20px; background: var(--border); }
 
