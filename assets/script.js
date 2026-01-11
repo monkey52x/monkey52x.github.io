@@ -19,6 +19,19 @@ async function initHeader() {
     }
 }
 
+// ДОБАВЛЯЕМ ФУНКЦИЮ ДЛЯ ФУТЕРА
+async function initFooter() {
+    const appElement = document.getElementById('app');
+    if (!appElement) return;
+
+    try {
+        const response = await fetch('/assets/footer.html');
+        const footerHtml = await response.text();
+        // Вставляем футер сразу после основного контента
+        appElement.insertAdjacentHTML('afterend', footerHtml);
+    } catch (err) { console.error("Ошибка загрузки футера:", err); }
+}
+
 async function loadPage(url) {
     try {
         const response = await fetch(url);
@@ -77,6 +90,7 @@ function applyTranslation(lang) {
 // ПРИ ЗАГРУЗКЕ: сначала загружаем шапку, потом переводим
 window.addEventListener('DOMContentLoaded', () => {
     initHeader();
+	initFooter()
 });
 
 window.onclick = e => {
