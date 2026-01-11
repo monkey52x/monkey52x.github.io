@@ -1,0 +1,33 @@
+привет, я хо зделать сайт для моей команди, такчто будет стобой его делать, смотри у меня раньше сайт бил на google sites но я хо ег оперенести на github pages.
+я хо шоб каждий сайт бил в своей папке на гит хабе типа так:
+monkey52x.github.io/
+index.html
+music.html
+monkey52x.github.io/fun/
+fun.html
+monkey52x.github.io/fun/Randomizer
+Randomizer.html
+monkey52x.github.io/fun/CodeBreaker
+CodeBreaker.html
+monkey52x.github.io/fun/Tic-Tac-Toe
+Tic-Tac-Toe.html
+monkey52x.github.io/fun/heads-or-tails
+heads-or-tails.html
+monkey52x.github.io/fun/ball-of-fate
+ball-of-fate.html
+monkey52x.github.io/minecraft/
+minecraft.html
+monkey52x.github.io/minecraft/launcher
+launcher.html
+monkey52x.github.io/minecraft/assemblies
+Assemblies.html
+monkey52x.github.io/unturned/
+unturned.html
+monkey52x.github.io/unturned/translation
+translation.html
+monkey52x.github.io/rust/
+rust.html
+monkey52x.github.io/rust/rust-recycle-calculator/
+rust-recycle-calculator.html
+
+кароче у меня такая ерархия:
