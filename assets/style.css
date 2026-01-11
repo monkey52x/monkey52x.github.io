@@ -69,13 +69,42 @@ nav { display: flex; justify-content: space-between; align-items: center; }
     color: white; padding: 6px 14px; border-radius: 6px; cursor: pointer; font-weight: 700;
 }
 
+/* --- Исправление меню выбора языка --- */
 .lang-options {
-    display: none; position: absolute; top: 120%; right: 0;
-    background: #161625; border: 1px solid var(--border); border-radius: 8px; z-index: 1000;
+    display: none;
+    position: absolute;
+    bottom: 120%; /* По умолчанию открываем вверх, чтобы на мобилках было видно */
+    right: 0;
+    background: #161625;
+    border: 1px solid var(--border);
+    border-radius: 12px; /* Закругление всего окна */
+    overflow: hidden;    /* КРИТИЧНО: обрезает фон кнопок по углам рамки */
+    z-index: 1000;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
 }
 .lang-options.show { display: block; }
-.lang-options span { display: block; padding: 10px 20px; cursor: pointer; font-size: 12px; transition: 0.2s; }
-.lang-options span:hover { background: var(--purple); }
+
+@media (min-width: 641px) {
+    .lang-options {
+        top: 120%;
+        bottom: auto;
+    }
+}
+
+.lang-options span {
+    display: block;
+    padding: 12px 20px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: 0.2s;
+    color: var(--text);
+}
+
+.lang-options span:hover {
+    background: var(--purple); /* Теперь это не будет вылезать за края */
+    color: white;
+}
 
 main { padding: 40px 8%; }
 
@@ -112,4 +141,42 @@ h1 { font-size: 3.5rem; margin-bottom: 15px; font-weight: 900; }
 .btn-back {
     display: inline-block; margin-top: 30px; padding: 12px 30px;
     background: var(--purple); color: white; border-radius: 8px; font-weight: 600; text-decoration: none;
+}
+
+/* --- МОБИЛЬНЫЙ ДИЗАЙН (Нижняя панель) --- */
+@media (max-width: 640px) {
+    header {
+        top: auto;
+        bottom: 0; /* Прижимаем к низу */
+        border-bottom: none;
+        border-top: 1px solid var(--border);
+        padding: 10px 5%;
+        background: rgba(5, 5, 10, 0.95);
+    }
+
+    nav {
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
+    .logo {
+        display: none; /* На маленьких экранах логотип можно скрыть для экономии места */
+    }
+
+    .nav-links {
+        gap: 15px;
+    }
+
+    .nav-links a {
+        font-size: 12px;
+        text-transform: uppercase;
+    }
+
+    .divider {
+        display: none; /* Убираем палочку на мобилках */
+    }
+    
+    main {
+        padding-bottom: 80px; /* Добавляем отступ снизу, чтобы контент не перекрывался меню */
+    }
 }
