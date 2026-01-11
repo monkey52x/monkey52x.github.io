@@ -1,7 +1,7 @@
 const translations = {
-    'ru': { 'nav_home': 'Главная', 'nav_fun': 'Приколы', 'nav_about': 'О нас', 'hero_title': 'Добро пожаловать', 'hero_desc': 'Выбирай раздел и погнали!', 'about_text': 'Тут информация о проекте XWW.' },
-    'uk': { 'nav_home': 'Головна', 'nav_fun': 'Приколи', 'nav_about': 'Про нас', 'hero_title': 'Ласкаво просимо', 'hero_desc': 'Обирай розділ та погнали!', 'about_text': 'Тут інформація про проект XWW.' },
-    'en': { 'nav_home': 'Home', 'nav_fun': 'Fun', 'nav_about': 'About', 'hero_title': 'Welcome', 'hero_desc': 'Pick a section and let\'s go!', 'about_text': 'Here is information about the XWW project.' }
+    'ru': { 'nav_home': 'Главная', 'nav_fun': 'Приколы', 'nav_about': 'О нас' },
+    'uk': { 'nav_home': 'Головна', 'nav_fun': 'Приколи', 'nav_about': 'Про нас' },
+    'en': { 'nav_home': 'Home', 'nav_fun': 'Fun', 'nav_about': 'About' }
 };
 
 // Функция для загрузки шапки
@@ -19,19 +19,6 @@ async function initHeader() {
     }
 }
 
-// ДОБАВЛЯЕМ ФУНКЦИЮ ДЛЯ ФУТЕРА
-async function initFooter() {
-    const appElement = document.getElementById('app');
-    if (!appElement) return;
-
-    try {
-        const response = await fetch('/assets/footer.html');
-        const footerHtml = await response.text();
-        // Вставляем футер сразу после основного контента
-        appElement.insertAdjacentHTML('afterend', footerHtml);
-    } catch (err) { console.error("Ошибка загрузки футера:", err); }
-}
-
 async function loadPage(url) {
     try {
         const response = await fetch(url);
@@ -40,7 +27,6 @@ async function loadPage(url) {
         const parser = new DOMParser();
         const doc = parser.parseFromString(html, 'text/html');
         
-        // Заменяем только контент
         document.getElementById('page-content').innerHTML = doc.getElementById('page-content').innerHTML;
         document.title = doc.title;
         
@@ -65,7 +51,6 @@ document.addEventListener('click', e => {
 
 window.addEventListener('popstate', () => loadPage(window.location.pathname));
 
-// Логика языка
 function toggleLangMenu() { 
     const options = document.getElementById('lang-options');
     if(options) options.classList.toggle('show'); 
@@ -87,10 +72,9 @@ function applyTranslation(lang) {
     });
 }
 
-// ПРИ ЗАГРУЗКЕ: сначала загружаем шапку, потом переводим
+// Загружаем только шапку
 window.addEventListener('DOMContentLoaded', () => {
     initHeader();
-	initFooter()
 });
 
 window.onclick = e => {

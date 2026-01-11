@@ -59,20 +59,19 @@ nav { display: flex; justify-content: space-between; align-items: center; }
 .lang-options span { display: block; padding: 12px 20px; cursor: pointer; transition: 0.2s; color: var(--text); }
 .lang-options span:hover { background: var(--purple); color: white; }
 
-/* --- ОСНОВНОЙ КОНТЕЙНЕР С ЛИНИЯМИ --- */
+/* --- КОНТЕЙНЕР БЕЗ ЛИНИЙ --- */
 .home-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1100px;
-    margin: 100px auto;
-    padding: 0 20px;
-    /* Убрали border-top и border-bottom */
+    max-width: 1200px;
+    margin: 120px auto;
+    padding: 0 40px;
 }
 
 .side-group {
     display: flex;
-    gap: 50px; /* Увеличили расстояние между картами */
+    gap: 60px;
 }
 
 /* КАРТОЧКА: Текст над иконкой */
@@ -87,19 +86,19 @@ nav { display: flex; justify-content: space-between; align-items: center; }
 
 .mini-card span {
     font-weight: 800;
-    font-size: 16px; /* Чуть больше шрифт названия */
+    font-size: 18px; /* Сделал текст чуть больше */
     text-transform: uppercase;
-    margin-bottom: 15px;
-    letter-spacing: 1px;
+    margin-bottom: 20px;
+    letter-spacing: 1.5px;
 }
 
-/* Белая рамка для иконки */
+/* КРУПНАЯ РАМКА ДЛЯ ИКОНКИ */
 .icon-box {
-    width: 140px;  /* Было 105, стало 140 */
-    height: 140px; /* Было 105, стало 140 */
+    width: 160px;  /* Увеличил со 140 до 160 */
+    height: 160px; /* Увеличил со 140 до 160 */
     border: 3px solid white;
-    border-radius: 20px;
-    padding: 15px;
+    border-radius: 25px;
+    padding: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -113,52 +112,16 @@ nav { display: flex; justify-content: space-between; align-items: center; }
     object-fit: contain;
 }
 
-.mini-card:hover { transform: translateY(-7px); }
+.mini-card:hover { transform: translateY(-10px); }
 .mini-card:hover .icon-box { 
     border-color: var(--accent); 
-    box-shadow: 0 0 20px var(--accent); 
+    box-shadow: 0 0 30px var(--accent); 
 }
 .mini-card:hover span { color: var(--accent); }
 
-.main-footer {
-    margin-top: 100px;
-    padding: 40px 8%;
-    background: rgba(5, 5, 10, 0.8);
-    border-top: 1px solid var(--border);
-    text-align: center;
-}
-
-.footer-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 15px;
-}
-
-.footer-logo {
-    font-size: 20px;
-    font-weight: 900;
-}
-
-.footer-logo span { color: var(--accent); }
-
-.footer-links {
-    display: flex;
-    gap: 20px;
-}
-
-.footer-links a {
-    color: var(--text);
-    text-decoration: none;
-    font-size: 13px;
-    transition: 0.3s;
-}
-
-.footer-links a:hover { color: var(--accent); }
-
-/* Адаптация */
+/* Адаптация для мобилок */
 @media (max-width: 800px) {
-    .home-container { flex-direction: column; gap: 50px; padding: 40px 20px; }
+    .home-container { flex-direction: column; gap: 60px; padding: 40px 20px; }
     .side-group { flex-wrap: wrap; justify-content: center; }
 }
 
