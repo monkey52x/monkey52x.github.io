@@ -4,25 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>X😘WW</title>
-	<link rel="icon" type="image/png" href="/assets/favicon.png">
+    <link rel="icon" type="image/png" href="/assets/favicon.png">
     <link rel="stylesheet" href="/assets/style.css">
 </head>
 <body>
     <div class="background-overlay"></div>
-	<header></header>
-    <main id="app">
+    <header></header> <main id="app">
         <div id="page-content" class="content-fade">
-            <section class="hero">
-                <h1 data-lang="hero_title">Добро пожаловать</h1>
-                <p data-lang="hero_desc">Выбирай раздел и погнали!</p>
-                <div class="game-grid">
-                    <a href="/games/rust/" data-link class="game-card rust"><div class="card-content"><h2>RUST</h2></div></a>
-                    <a href="/games/minecraft/" data-link class="game-card mc"><div class="card-content"><h2>MINECRAFT</h2></div></a>
-                    <a href="/games/unturned/" data-link class="game-card unturned"><div class="card-content"><h2>UNTURNED</h2></div></a>
+            <div class="home-container">
+                <div class="side-group">
+                    <a href="/games/rust/" data-link class="mini-card">
+                        <span>Rust</span>
+                        <div class="icon-box">
+                            <img src="https://files.facepunch.com/rust/item/wall.frame.garagedoor_512.png" alt="Rust">
+                        </div>
+                    </a>
+                    <a href="/games/minecraft/" data-link class="mini-card">
+                        <span>Minecraft</span>
+                        <div class="icon-box">
+                            <img src="https://www.minecraft.net/content/dam/games/minecraft/key-art/Games_Subnav_Minecraft-Wild-Update.jpg" alt="MC">
+                        </div>
+                    </a>
+                    <a href="/games/unturned/" data-link class="mini-card">
+                        <span>Unturned</span>
+                        <div class="icon-box">
+                            <img src="https://smartcdn.gprod.postmedia.digital/nationalpost/wp-content/uploads/2014/08/unturned.jpg" alt="Unturned">
+                        </div>
+                    </a>
                 </div>
-            </section>
+
+                <div class="side-group">
+                    <a href="/fun/" data-link class="mini-card">
+                        <span>Приколи</span>
+                        <div class="icon-box">
+                            <img src="https://cdn-icons-png.flaticon.com/512/3421/3421110.png" alt="Fun">
+                        </div>
+                    </a>
+                </div>
+            </div>
         </div>
     </main>
+
     <script src="/assets/script.js"></script>
 </body>
 </html>
