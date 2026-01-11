@@ -1,11 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&display=swap');
 
 :root {
-    --bg: #0d0d15;
+    --bg: #0a0a0f; /* Сделал чуть темнее для стабильности */
     --purple: #8a2be2;
     --accent: #ff00ff;
     --text: #e0e0e0;
-    --border: rgba(255, 255, 255, 0.1);
+    --border: rgba(255, 255, 255, 0.08);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -21,17 +21,17 @@ body {
 .background-overlay {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
-    background: radial-gradient(circle at 50% -20%, #1e0b36 0%, #0d0d15 100%);
+    background: radial-gradient(circle at 50% -20%, #1a0830 0%, #0a0a0f 100%);
     z-index: -1;
 }
 
 header {
-    background: rgba(5, 5, 10, 0.9); 
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(10, 10, 15, 0.95); /* Усилил плотность фона */
+    backdrop-filter: blur(15px);
+    border-bottom: 1px solid var(--border);
     padding: 15px 8%;
     position: sticky;
-    top: 0; z-index: 100;
+    top: 0; z-index: 1000;
 }
 
 nav { display: flex; justify-content: space-between; align-items: center; }
@@ -43,136 +43,92 @@ nav { display: flex; justify-content: space-between; align-items: center; }
 .nav-right { display: flex; align-items: center; gap: 20px; }
 .nav-links { list-style: none; display: flex; gap: 25px; }
 .nav-links a { text-decoration: none; color: var(--text); font-size: 14px; font-weight: 600; transition: 0.3s; }
-.nav-links a:hover { color: var(--accent); }
+.nav-links a:hover { color: var(--accent); text-shadow: 0 0 8px var(--accent); }
 
-/* Контейнер для позиционирования */
-.lang-dropdown {
-    position: relative;
-    display: inline-block;
-}
-
+/* Исправленный выбор языка */
+.lang-dropdown { position: relative; }
 .lang-btn {
-    background: rgba(255,255,255,0.05);
-    border: 1px solid var(--border);
-    color: white;
-    padding: 6px 14px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
+    background: rgba(255,255,255,0.05); border: 1px solid var(--border);
+    color: white; padding: 7px 15px; border-radius: 6px; cursor: pointer; font-weight: 700;
 }
-
-/* Выпадающее меню */
 .lang-options {
-    display: none;
-    position: absolute;
-    top: calc(100% + 5px); /* Строго под кнопкой + небольшой отступ */
-    right: 0;              /* Выравнивание по правому краю кнопки */
-    background: #161625;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    min-width: 80px;       /* Ширина меню */
-    overflow: hidden;
-    z-index: 10001;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    display: none; position: absolute; top: calc(100% + 10px); right: 0;
+    background: #12121c; border: 1px solid var(--border); border-radius: 10px;
+    min-width: 100px; overflow: hidden; z-index: 1100;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.8);
 }
+.lang-options.show { display: block; }
+.lang-options span { display: block; padding: 12px; cursor: pointer; text-align: center; transition: 0.2s; }
+.lang-options span:hover { background: var(--purple); }
 
-.lang-options.show {
-    display: block;
-}
-
-.lang-options span {
-    display: block;
-    padding: 10px 15px;
-    cursor: pointer;
-    transition: 0.2s;
-    color: var(--text);
-    text-align: center;
-    font-size: 14px;
-}
-
-.lang-options span:hover {
-    background: var(--purple);
-    color: white;
-}
-
-/* --- КОНТЕЙНЕР БЕЗ ЛИНИЙ --- */
+/* --- ОЖИВЛЕННЫЙ КОНТЕЙНЕР --- */
 .home-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     max-width: 1200px;
-    margin: 120px auto;
-    padding: 0 40px;
+    margin: 100px auto;
+    padding: 0 50px;
 }
 
-.side-group {
-    display: flex;
-    gap: 60px;
-}
+.side-group { display: flex; gap: 50px; }
 
-/* КАРТОЧКА: Текст над иконкой */
 .mini-card {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-decoration: none;
     color: white;
-    transition: 0.3s ease;
+    transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .mini-card span {
-    font-weight: 800;
-    font-size: 18px; /* Сделал текст чуть больше */
-    text-transform: uppercase;
-    margin-bottom: 20px;
-    letter-spacing: 1.5px;
+    font-weight: 800; font-size: 16px; text-transform: uppercase;
+    margin-bottom: 20px; letter-spacing: 2px; color: rgba(255,255,255,0.7);
+    transition: 0.3s;
 }
 
-/* КРУПНАЯ РАМКА ДЛЯ ИКОНКИ */
+/* Рамка иконки стала больше и активнее */
 .icon-box {
-    width: 160px;  /* Увеличил со 140 до 160 */
-    height: 160px; /* Увеличил со 140 до 160 */
-    border: 3px solid white;
-    border-radius: 25px;
-    padding: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(255, 255, 255, 0.02);
-    transition: 0.3s ease;
+    width: 170px; height: 170px;
+    border: 2px solid rgba(255,255,255,0.2);
+    border-radius: 30px;
+    padding: 10px; /* Уменьшил padding, чтобы картинка внутри была больше */
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(255, 255, 255, 0.03);
+    position: relative;
+    overflow: hidden;
+    transition: 0.4s;
 }
 
+/* Сама картинка внутри стала крупнее */
 .icon-box img {
-    width: 100%;
-    height: 100%;
+    width: 85%; height: 85%;
     object-fit: contain;
+    transition: 0.5s;
+    filter: drop-shadow(0 5px 15px rgba(0,0,0,0.5));
 }
 
-.mini-card:hover { transform: translateY(-10px); }
-.mini-card:hover .icon-box { 
-    border-color: var(--accent); 
-    box-shadow: 0 0 30px var(--accent); 
+/* --- АНИМАЦИИ --- */
+.mini-card:hover { transform: translateY(-15px); }
+.mini-card:hover .icon-box {
+    border-color: var(--accent);
+    background: rgba(138, 43, 226, 0.1);
+    box-shadow: 0 0 40px rgba(255, 0, 255, 0.2);
 }
+.mini-card:hover img { transform: scale(1.1) rotate(3deg); }
 .mini-card:hover span { color: var(--accent); }
 
-/* Адаптация для мобилок */
-@media (max-width: 800px) {
-    .home-container { flex-direction: column; gap: 60px; padding: 40px 20px; }
-    .side-group { flex-wrap: wrap; justify-content: center; }
+/* Плавающая анимация для всех иконок */
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
 }
+.icon-box { animation: float 4s ease-in-out infinite; }
+.mini-card:nth-child(2) .icon-box { animation-delay: 1s; }
+.mini-card:nth-child(3) .icon-box { animation-delay: 2s; }
 
-.content-fade { animation: fadeIn 0.4s ease-out; }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-.glass-panel {
-    background: rgba(255,255,255,0.03); backdrop-filter: blur(15px);
-    padding: 60px; border-radius: 30px; border: 1px solid var(--border);
-    max-width: 800px; margin: 40px auto; text-align: center;
-}
-
-.btn-back {
-    display: inline-block; margin-top: 30px; padding: 12px 30px;
-    background: var(--purple); color: white; border-radius: 8px; font-weight: 600; text-decoration: none;
-}
+/* Плавный вход страницы */
+.content-fade { animation: fadeIn 0.8s ease-out; }
+@keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
