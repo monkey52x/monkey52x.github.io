@@ -12,9 +12,20 @@ async function loadPage(url) {
         const parser = new DOMParser();
         const doc = parser.parseFromString(html, 'text/html');
         
-        document.getElementById('page-content').innerHTML = doc.getElementById('page-content').innerHTML;
-        document.title = doc.title;
+        // 1. Обновляем контент страницы
+        const newContent = doc.getElementById('page-content');
+        if (newContent) {
+            document.getElementById('page-content').innerHTML = newContent.innerHTML;
+        }
+
+        // 2. ИСПРАВЛЕНИЕ: Если при обновлении пропала шапка, мы берем её из загруженного файла
+        const newHeader = doc.querySelector('header');
+        const currentHeader = document.querySelector('header');
+        if (newHeader && (!currentHeader || currentHeader.innerHTML.trim() === "")) {
+             document.body.insertAdjacentHTML('afterbegin', newHeader.outerHTML);
+        }
         
+        document.title = doc.title;
         window.scrollTo(0, 0);
         applyTranslation(localStorage.getItem('selectedLang') || 'ru');
     } catch (err) {
@@ -60,3 +71,4 @@ window.onclick = e => {
         if (dropdown) dropdown.classList.remove('show');
     }
 }
+
