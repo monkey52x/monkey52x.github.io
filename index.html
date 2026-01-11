@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>X😘WW | Official Hub</title>
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -12,12 +12,12 @@
     
     <header>
         <nav>
-            <div class="logo" onclick="window.location.href='/'">X😘<span>WW</span></div>
+            <div class="logo" onclick="navigateTo('home')">X😘<span>WW</span></div>
             <div class="nav-right">
                 <ul class="nav-links">
-                    <li><a href="/" data-link data-lang="nav_home">Главная</a></li>
-                    <li><a href="/fun/" data-link data-lang="nav_fun">Приколы</a></li>
-                    <li><a href="/about/" data-link data-lang="nav_about">О нас</a></li>
+                    <li><a href="javascript:void(0)" onclick="navigateTo('home')" data-lang="nav_home">Главная</a></li>
+                    <li><a href="javascript:void(0)" onclick="navigateTo('fun')" data-lang="nav_fun">Приколы</a></li>
+                    <li><a href="javascript:void(0)" onclick="navigateTo('about')" data-lang="nav_about">О нас</a></li>
                 </ul>
                 <div class="divider"></div>
                 <div class="lang-dropdown">
@@ -32,20 +32,8 @@
         </nav>
     </header>
 
-    <main id="app">
-        <div id="page-content" class="content-fade">
-            <section class="hero">
-                <h1 data-lang="hero_title">Добро пожаловать</h1>
-                <p data-lang="hero_desc">Выбирай раздел и погнали!</p>
-                <div class="game-grid">
-                    <a href="/rust/" data-link class="game-card rust"><div class="card-content"><h2>RUST</h2></div></a>
-                    <a href="/minecraft/" data-link class="game-card mc"><div class="card-content"><h2>MINECRAFT</h2></div></a>
-                    <a href="/unturned/" data-link class="game-card unturned"><div class="card-content"><h2>UNTURNED</h2></div></a>
-                </div>
-            </section>
-        </div>
-    </main>
+    <main id="app-content"></main>
 
-    <script src="/script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
