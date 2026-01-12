@@ -35,13 +35,11 @@ header {
     padding: 15px 8%;
     position: sticky;
     top: 0; z-index: 1000;
-    width: 100%;
-    display: block;
 }
 
 nav { 
     display: flex; justify-content: space-between; align-items: center; 
-    max-width: 1400px; margin: 0 auto;
+    max-width: 1600px; margin: 0 auto;
 }
 
 .logo { font-size: 24px; font-weight: 900; letter-spacing: 3px; text-shadow: 0 0 15px var(--purple); }
@@ -55,28 +53,38 @@ nav {
 
 /* --- CONTENT --- */
 #app { flex: 1; display: flex; flex-direction: column; }
-#page-content { flex: 1; display: flex; align-items: center; justify-content: center; padding: 40px 20px; }
+#page-content { 
+    flex: 1; 
+    display: flex; 
+    align-items: flex-start; 
+    justify-content: center; 
+    padding: 120px 20px; /* Опустили плитки ниже */
+}
 
-/* --- HOME GRID --- */
+/* --- HOME GRID (АДАПТИВНЫЙ РАЗБРОС) --- */
 .home-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 60px;
+    /* Расстояние между группами растет от 60px до 160px */
+    gap: clamp(60px, 10vw, 160px);
     flex-wrap: wrap;
-    max-width: 1200px;
+    max-width: 1800px;
 }
 
 .side-group { 
     display: flex; 
-    gap: 40px; 
+    gap: clamp(20px, 3vw, 45px); 
     align-items: flex-end;
 }
 
+/* --- КАРТОЧКА (АДАПТИВНЫЙ РАЗМЕР) --- */
 .icon-box {
-    width: 190px; height: 190px; /* Крупные иконки */
+    /* Размер растет от 170px до 260px в зависимости от ширины экрана */
+    width: clamp(170px, 15vw, 260px); 
+    height: clamp(170px, 15vw, 260px);
     border: 2px solid rgba(255,255,255,0.2);
-    border-radius: 35px;
+    border-radius: clamp(30px, 3vw, 45px);
     display: flex; align-items: center; justify-content: center;
     background: rgba(255, 255, 255, 0.03);
     transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -95,17 +103,25 @@ nav {
 
 .mini-card span {
     font-weight: 800; font-size: 16px; text-transform: uppercase;
-    margin-bottom: 15px; letter-spacing: 2px; color: rgba(255,255,255,0.7);
+    margin-bottom: 25px; /* Текст выше над плиткой */
+    letter-spacing: 2px; color: rgba(255,255,255,0.7);
+    transition: 0.3s;
 }
 
+/* --- ЭФФЕКТЫ ПРИ НАВЕДЕНИИ --- */
 .mini-card:hover { transform: translateY(-15px); }
 .mini-card:hover .icon-box {
     border-color: var(--accent);
-    background: rgba(138, 43, 226, 0.1);
-    box-shadow: 0 0 50px rgba(255, 0, 255, 0.25);
+    background: rgba(138, 43, 226, 0.15);
+    box-shadow: 0 0 60px rgba(255, 0, 255, 0.35);
 }
 .mini-card:hover img { transform: scale(1.1) rotate(3deg); }
-.mini-card:hover span { color: var(--accent); text-shadow: 0 0 10px var(--accent); }
+
+/* Свечение текста при наведении */
+.mini-card:hover span { 
+    color: #fff; 
+    text-shadow: 0 0 15px var(--accent), 0 0 30px var(--purple); 
+}
 
 /* --- МОБИЛЬНЫЙ РАЗДЕЛИТЕЛЬ --- */
 .mobile-divider {
@@ -113,57 +129,49 @@ nav {
     width: 100%;
     height: 1px;
     background: linear-gradient(to right, transparent, var(--border), transparent);
-    margin: 20px 0;
+    margin: 30px 0;
 }
 
-/* --- АДАПТАЦИЯ (GRID) --- */
+/* --- АДАПТАЦИЯ (МОБИЛКИ И ПЛАНШЕТЫ) --- */
 @media (max-width: 900px) {
-    .icon-box { width: 160px; height: 160px; }
     .home-container { gap: 40px; }
 }
 
 @media (max-width: 650px) {
+    #page-content { padding-top: 60px; }
     .home-container { flex-direction: column; }
     .mobile-divider { display: block; }
 
     .side-group {
         display: grid;
-        grid-template-columns: repeat(2, 1fr); /* 2 в ряд */
+        grid-template-columns: repeat(2, 1fr);
         gap: 20px;
         width: 100%;
     }
 
-    /* Одиночные элементы (приколы) центрируем */
     .side-group:has(.mini-card:only-child) {
         display: flex;
         justify-content: center;
     }
 
-    .icon-box { width: 140px; height: 140px; border-radius: 25px; }
+    .icon-box { width: 145px; height: 145px; border-radius: 25px; }
+    .mini-card span { margin-bottom: 15px; font-size: 14px; }
 }
 
 @media (max-width: 400px) {
-    .side-group { grid-template-columns: 1fr; } /* 1 в ряд на очень маленьких */
-    .icon-box { width: 160px; height: 160px; }
+    .side-group { grid-template-columns: 1fr; }
+    .icon-box { width: 165px; height: 165px; }
 }
 
-/* --- GLASS PANEL --- */
+/* --- GLASS PANEL (ДЛЯ ВНУТРЕННИХ СТРАНИЦ) --- */
 .glass-panel {
     background: rgba(255, 255, 255, 0.03);
     backdrop-filter: blur(25px);
     border: 1px solid var(--border);
     border-radius: 40px;
-    padding: 60px;
+    padding: clamp(30px, 5vw, 60px);
     width: 100%; max-width: 800px;
     text-align: center;
-}
-
-.glass-panel h1 {
-    font-size: clamp(2rem, 5vw, 3rem);
-    margin-bottom: 25px;
-    background: linear-gradient(to right, #fff, var(--accent));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
 }
 
 .btn-back {
@@ -180,6 +188,6 @@ nav {
 .lang-options span { display: block; padding: 10px 20px; cursor: pointer; }
 .lang-options span:hover { background: var(--purple); }
 
-@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
 .content-fade { animation: fadeIn 0.6s ease-out; }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }

@@ -1,16 +1,17 @@
 let translations = {};
 
-// Загрузка переводов из внешнего файла
+// Загрузка переводов
 async function loadTranslations() {
     try {
         const response = await fetch('/assets/translations.json');
         translations = await response.json();
         applyTranslation(localStorage.getItem('selectedLang') || 'ru');
     } catch (err) {
-        console.error("Ошибка загрузки переводов:", err);
+        console.error("Критическая ошибка: файл translations.json не найден в /assets/");
     }
 }
 
+// Инициализация шапки
 async function initHeader() {
     const headerElement = document.querySelector('header');
     if (!headerElement) return;
@@ -19,9 +20,9 @@ async function initHeader() {
         const response = await fetch('/assets/header.html');
         const headerHtml = await response.text();
         headerElement.innerHTML = headerHtml;
-        await loadTranslations(); // Грузим переводы СРАЗУ после шапки
+        await loadTranslations(); 
     } catch (err) {
-        console.error("Ошибка загрузки шапки:", err);
+        console.error("Ошибка загрузки header.html");
     }
 }
 
@@ -37,7 +38,7 @@ function applyTranslation(lang) {
     });
 }
 
-// SPA Навигация
+// SPA Логика
 async function loadPage(url) {
     try {
         const response = await fetch(url);
@@ -46,11 +47,13 @@ async function loadPage(url) {
         const parser = new DOMParser();
         const doc = parser.parseFromString(html, 'text/html');
         
-        document.getElementById('page-content').innerHTML = doc.getElementById('page-content').innerHTML;
-        document.title = doc.title;
-        
-        window.scrollTo(0, 0);
-        applyTranslation(localStorage.getItem('selectedLang') || 'ru');
+        const newContent = doc.getElementById('page-content');
+        if (newContent) {
+            document.getElementById('page-content').innerHTML = newContent.innerHTML;
+            document.title = doc.title;
+            window.scrollTo(0, 0);
+            applyTranslation(localStorage.getItem('selectedLang') || 'ru');
+        }
     } catch (err) {
         window.location.href = url;
     }
@@ -61,18 +64,16 @@ document.addEventListener('click', e => {
     if (link) {
         e.preventDefault();
         const url = link.getAttribute('href');
-        if (window.location.pathname !== url) {
-            history.pushState(null, null, url);
-            loadPage(url);
-        }
+        history.pushState(null, null, url);
+        loadPage(url);
     }
 });
 
 window.addEventListener('popstate', () => loadPage(window.location.pathname));
 
+// Функции интерфейса
 function toggleLangMenu() { 
-    const options = document.getElementById('lang-options');
-    if(options) options.classList.toggle('show'); 
+    document.getElementById('lang-options')?.classList.toggle('show'); 
 }
 
 function selectLang(lang) {
@@ -82,7 +83,6 @@ function selectLang(lang) {
 }
 
 window.addEventListener('DOMContentLoaded', initHeader);
-
 window.onclick = e => {
     if (!e.target.matches('.lang-btn')) {
         document.getElementById('lang-options')?.classList.remove('show');
