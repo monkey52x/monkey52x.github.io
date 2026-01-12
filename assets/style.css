@@ -27,26 +27,21 @@ body {
     z-index: -1;
 }
 
-/* --- ШАПКА (HEADER) --- */
+/* --- HEADER --- */
 header {
     background: rgba(10, 10, 15, 0.95);
     backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
     border-bottom: 1px solid var(--border);
     padding: 15px 8%;
     position: sticky;
-    top: 0; 
-    z-index: 1000;
+    top: 0; z-index: 1000;
     width: 100%;
     display: block;
 }
 
 nav { 
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center; 
-    max-width: 1400px; 
-    margin: 0 auto;
+    display: flex; justify-content: space-between; align-items: center; 
+    max-width: 1400px; margin: 0 auto;
 }
 
 .logo { font-size: 24px; font-weight: 900; letter-spacing: 3px; text-shadow: 0 0 15px var(--purple); }
@@ -58,34 +53,11 @@ nav {
 .nav-links a { text-decoration: none; color: var(--text); font-size: 14px; font-weight: 600; transition: 0.3s; }
 .nav-links a:hover { color: var(--accent); text-shadow: 0 0 8px var(--accent); }
 
-/* --- ВЫБОР ЯЗЫКА --- */
-.lang-dropdown { position: relative; }
-.lang-btn {
-    background: rgba(255,255,255,0.05); border: 1px solid var(--border);
-    color: white; padding: 7px 15px; border-radius: 6px; cursor: pointer; font-weight: 700;
-}
-.lang-options {
-    display: none; position: absolute; top: calc(100% + 10px); right: 0;
-    background: #12121c; border: 1px solid var(--border); border-radius: 10px;
-    min-width: 100px; overflow: hidden; z-index: 1100;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-}
-.lang-options.show { display: block; }
-.lang-options span { display: block; padding: 12px; cursor: pointer; text-align: center; transition: 0.2s; }
-.lang-options span:hover { background: var(--purple); }
-
-/* --- ЦЕНТРИРОВКА КОНТЕНТА --- */
+/* --- CONTENT --- */
 #app { flex: 1; display: flex; flex-direction: column; }
+#page-content { flex: 1; display: flex; align-items: center; justify-content: center; padding: 40px 20px; }
 
-#page-content { 
-    flex: 1; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    padding: 40px 20px; 
-}
-
-/* --- ГЛАВНАЯ СТРАНИЦА (ОЖИВЛЕННАЯ ЛОГИКА) --- */
+/* --- HOME GRID --- */
 .home-container {
     display: flex;
     justify-content: center;
@@ -95,120 +67,119 @@ nav {
     max-width: 1200px;
 }
 
-.side-group { display: flex; gap: 50px; }
+.side-group { 
+    display: flex; 
+    gap: 40px; 
+    align-items: flex-end;
+}
+
+.icon-box {
+    width: 190px; height: 190px; /* Крупные иконки */
+    border: 2px solid rgba(255,255,255,0.2);
+    border-radius: 35px;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(255, 255, 255, 0.03);
+    transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    animation: float 4s ease-in-out infinite;
+}
+
+.icon-box img {
+    width: 80%; height: 80%; object-fit: contain;
+    transition: 0.5s; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.5));
+}
 
 .mini-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-decoration: none;
-    color: white;
-    transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex; flex-direction: column; align-items: center;
+    text-decoration: none; color: white; transition: 0.4s;
 }
 
 .mini-card span {
     font-weight: 800; font-size: 16px; text-transform: uppercase;
-    margin-bottom: 20px; letter-spacing: 2px; color: rgba(255,255,255,0.7);
-    transition: 0.3s;
+    margin-bottom: 15px; letter-spacing: 2px; color: rgba(255,255,255,0.7);
 }
 
-.icon-box {
-    width: 170px; height: 170px;
-    border: 2px solid rgba(255,255,255,0.2);
-    border-radius: 30px;
-    padding: 10px;
-    display: flex; align-items: center; justify-content: center;
-    background: rgba(255, 255, 255, 0.03);
-    position: relative;
-    overflow: hidden;
-    transition: 0.4s;
-    /* Плавающая анимация из твоего примера */
-    animation: float 4s ease-in-out infinite; 
-}
-
-.icon-box img {
-    width: 85%; height: 85%;
-    object-fit: contain;
-    transition: 0.5s;
-    filter: drop-shadow(0 5px 15px rgba(0,0,0,0.5));
-}
-
-/* --- ЭФФЕКТЫ ПРИ НАВЕДЕНИИ (ЛУЧШАЯ ВЕРСИЯ) --- */
 .mini-card:hover { transform: translateY(-15px); }
-
 .mini-card:hover .icon-box {
     border-color: var(--accent);
     background: rgba(138, 43, 226, 0.1);
-    box-shadow: 0 0 40px rgba(255, 0, 255, 0.2); /* То самое свечение */
+    box-shadow: 0 0 50px rgba(255, 0, 255, 0.25);
+}
+.mini-card:hover img { transform: scale(1.1) rotate(3deg); }
+.mini-card:hover span { color: var(--accent); text-shadow: 0 0 10px var(--accent); }
+
+/* --- МОБИЛЬНЫЙ РАЗДЕЛИТЕЛЬ --- */
+.mobile-divider {
+    display: none;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--border), transparent);
+    margin: 20px 0;
 }
 
-.mini-card:hover img { 
-    transform: scale(1.1) rotate(3deg); /* Вращение из твоего примера */
+/* --- АДАПТАЦИЯ (GRID) --- */
+@media (max-width: 900px) {
+    .icon-box { width: 160px; height: 160px; }
+    .home-container { gap: 40px; }
 }
 
-.mini-card:hover span { 
-    color: var(--accent); 
-    text-shadow: 0 0 10px var(--accent);
+@media (max-width: 650px) {
+    .home-container { flex-direction: column; }
+    .mobile-divider { display: block; }
+
+    .side-group {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* 2 в ряд */
+        gap: 20px;
+        width: 100%;
+    }
+
+    /* Одиночные элементы (приколы) центрируем */
+    .side-group:has(.mini-card:only-child) {
+        display: flex;
+        justify-content: center;
+    }
+
+    .icon-box { width: 140px; height: 140px; border-radius: 25px; }
 }
 
-/* Задержки анимаций для "живого" эффекта */
-.mini-card:nth-child(2) .icon-box { animation-delay: 1s; }
-.mini-card:nth-child(3) .icon-box { animation-delay: 2s; }
+@media (max-width: 400px) {
+    .side-group { grid-template-columns: 1fr; } /* 1 в ряд на очень маленьких */
+    .icon-box { width: 160px; height: 160px; }
+}
 
-/* --- ВНУТРЕННИЕ СТРАНИЦЫ (GLASS PANEL) --- */
-.container { width: 100%; display: flex; justify-content: center; }
-
+/* --- GLASS PANEL --- */
 .glass-panel {
     background: rgba(255, 255, 255, 0.03);
     backdrop-filter: blur(25px);
-    -webkit-backdrop-filter: blur(25px);
     border: 1px solid var(--border);
     border-radius: 40px;
     padding: 60px;
-    width: 100%;
-    max-width: 800px;
+    width: 100%; max-width: 800px;
     text-align: center;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.4);
 }
 
 .glass-panel h1 {
-    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-size: clamp(2rem, 5vw, 3rem);
     margin-bottom: 25px;
     background: linear-gradient(to right, #fff, var(--accent));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    text-transform: uppercase;
 }
 
 .btn-back {
-    display: inline-block;
-    padding: 12px 35px;
-    background: var(--purple);
-    color: white;
-    border-radius: 12px;
-    font-weight: 700;
-    text-decoration: none;
-    transition: 0.3s;
-    margin-top: 20px;
+    display: inline-block; padding: 12px 35px; background: var(--purple);
+    color: white; border-radius: 12px; font-weight: 700; text-decoration: none; transition: 0.3s;
 }
 .btn-back:hover { background: var(--accent); transform: scale(1.05); }
 
-/* --- ГЛОБАЛЬНЫЕ АНИМАЦИИ --- */
-@keyframes float {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
-    100% { transform: translateY(0px); }
-}
+/* --- ЯЗЫК --- */
+.lang-dropdown { position: relative; }
+.lang-btn { background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: white; padding: 7px 15px; border-radius: 8px; cursor: pointer; }
+.lang-options { display: none; position: absolute; top: 110%; right: 0; background: #12121c; border: 1px solid var(--border); border-radius: 10px; z-index: 1100; }
+.lang-options.show { display: block; }
+.lang-options span { display: block; padding: 10px 20px; cursor: pointer; }
+.lang-options span:hover { background: var(--purple); }
 
-.content-fade { animation: fadeIn 0.8s ease-out; width: 100%; }
-
-@keyframes fadeIn { 
-    from { opacity: 0; transform: scale(0.95); } 
-    to { opacity: 1; transform: scale(1); } 
-}
-
-/* Адаптивность */
-@media (max-width: 900px) {
-    .home-container { gap: 30px; }
-    .side-group { flex-direction: column; gap: 30px; }
-}
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+.content-fade { animation: fadeIn 0.6s ease-out; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }

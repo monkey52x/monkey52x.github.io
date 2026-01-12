@@ -1,0 +1,26 @@
+{
+    "ru": {
+        "nav_home": "Главная",
+        "nav_fun": "Приколы",
+        "nav_about": "О нас",
+        "hero_desc": "Выбирай раздел и погнали!",
+        "btn_back": "← Назад на главную",
+        "about_text": "Тут информация о проекте X😘WW."
+    },
+    "uk": {
+        "nav_home": "Головна",
+        "nav_fun": "Приколи",
+        "nav_about": "Про нас",
+        "hero_desc": "Обирай розділ та погнали!",
+        "btn_back": "← Назад на головну",
+        "about_text": "Тут інформація про проект X😘WW."
+    },
+    "en": {
+        "nav_home": "Home",
+        "nav_fun": "Fun",
+        "nav_about": "About",
+        "hero_desc": "Pick a section and let's go!",
+        "btn_back": "← Back to home",
+        "about_text": "Here is information about the X😘WW project."
+    }
+}

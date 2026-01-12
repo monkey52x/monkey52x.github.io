@@ -1,10 +1,16 @@
-const translations = {
-    'ru': { 'nav_home': 'Главная', 'nav_fun': 'Приколы', 'nav_about': 'О нас' },
-    'uk': { 'nav_home': 'Головна', 'nav_fun': 'Приколи', 'nav_about': 'Про нас' },
-    'en': { 'nav_home': 'Home', 'nav_fun': 'Fun', 'nav_about': 'About' }
-};
+let translations = {};
 
-// Функция для загрузки шапки
+// Загрузка переводов из внешнего файла
+async function loadTranslations() {
+    try {
+        const response = await fetch('/assets/translations.json');
+        translations = await response.json();
+        applyTranslation(localStorage.getItem('selectedLang') || 'ru');
+    } catch (err) {
+        console.error("Ошибка загрузки переводов:", err);
+    }
+}
+
 async function initHeader() {
     const headerElement = document.querySelector('header');
     if (!headerElement) return;
@@ -13,12 +19,25 @@ async function initHeader() {
         const response = await fetch('/assets/header.html');
         const headerHtml = await response.text();
         headerElement.innerHTML = headerHtml;
-        applyTranslation(localStorage.getItem('selectedLang') || 'ru');
+        await loadTranslations(); // Грузим переводы СРАЗУ после шапки
     } catch (err) {
         console.error("Ошибка загрузки шапки:", err);
     }
 }
 
+function applyTranslation(lang) {
+    const btn = document.getElementById('current-lang');
+    if (btn) btn.textContent = lang.toUpperCase();
+    
+    document.querySelectorAll('[data-lang]').forEach(el => {
+        const key = el.getAttribute('data-lang');
+        if (translations[lang] && translations[lang][key]) {
+            el.textContent = translations[lang][key];
+        }
+    });
+}
+
+// SPA Навигация
 async function loadPage(url) {
     try {
         const response = await fetch(url);
@@ -59,27 +78,13 @@ function toggleLangMenu() {
 function selectLang(lang) {
     localStorage.setItem('selectedLang', lang);
     applyTranslation(lang);
-    const options = document.getElementById('lang-options');
-    if(options) options.classList.remove('show');
+    document.getElementById('lang-options')?.classList.remove('show');
 }
 
-function applyTranslation(lang) {
-    const btn = document.getElementById('current-lang');
-    if (btn) btn.textContent = lang.toUpperCase();
-    document.querySelectorAll('[data-lang]').forEach(el => {
-        const key = el.getAttribute('data-lang');
-        if (translations[lang] && translations[lang][key]) el.textContent = translations[lang][key];
-    });
-}
-
-// Загружаем только шапку
-window.addEventListener('DOMContentLoaded', () => {
-    initHeader();
-});
+window.addEventListener('DOMContentLoaded', initHeader);
 
 window.onclick = e => {
     if (!e.target.matches('.lang-btn')) {
-        const dropdown = document.getElementById('lang-options');
-        if (dropdown) dropdown.classList.remove('show');
+        document.getElementById('lang-options')?.classList.remove('show');
     }
 }
