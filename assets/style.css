@@ -66,7 +66,6 @@ nav {
     display: flex;
     justify-content: center;
     align-items: center;
-    /* Расстояние между группами растет от 60px до 160px */
     gap: clamp(60px, 10vw, 160px);
     flex-wrap: wrap;
     max-width: 1800px;
@@ -80,7 +79,6 @@ nav {
 
 /* --- КАРТОЧКА (АДАПТИВНЫЙ РАЗМЕР) --- */
 .icon-box {
-    /* Размер растет от 170px до 260px в зависимости от ширины экрана */
     width: clamp(170px, 15vw, 260px); 
     height: clamp(170px, 15vw, 260px);
     border: 2px solid rgba(255,255,255,0.2);
@@ -90,6 +88,12 @@ nav {
     transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     animation: float 4s ease-in-out infinite;
 }
+
+/* --- РАЗНОБОЙ АНИМАЦИЙ --- */
+.mini-card:nth-child(1) .icon-box { animation-duration: 3.7s; animation-delay: 0.1s; }
+.mini-card:nth-child(2) .icon-box { animation-duration: 4.4s; animation-delay: -0.6s; }
+.mini-card:nth-child(3) .icon-box { animation-duration: 4.1s; animation-delay: 0.3s; }
+.mini-card:nth-child(4) .icon-box { animation-duration: 3.9s; animation-delay: -0.9s; }
 
 .icon-box img {
     width: 80%; height: 80%; object-fit: contain;
@@ -103,7 +107,7 @@ nav {
 
 .mini-card span {
     font-weight: 800; font-size: 16px; text-transform: uppercase;
-    margin-bottom: 25px; /* Текст выше над плиткой */
+    margin-bottom: 25px; 
     letter-spacing: 2px; color: rgba(255,255,255,0.7);
     transition: 0.3s;
 }
@@ -117,7 +121,6 @@ nav {
 }
 .mini-card:hover img { transform: scale(1.1) rotate(3deg); }
 
-/* Свечение текста при наведении */
 .mini-card:hover span { 
     color: #fff; 
     text-shadow: 0 0 15px var(--accent), 0 0 30px var(--purple); 
@@ -163,7 +166,7 @@ nav {
     .icon-box { width: 165px; height: 165px; }
 }
 
-/* --- GLASS PANEL (ДЛЯ ВНУТРЕННИХ СТРАНИЦ) --- */
+/* --- GLASS PANEL --- */
 .glass-panel {
     background: rgba(255, 255, 255, 0.03);
     backdrop-filter: blur(25px);

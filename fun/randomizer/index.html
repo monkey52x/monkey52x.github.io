@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>X😘WW - Рандомайзер</title>
+    <link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+    <div class="background-overlay"></div>
+    
+    <header></header>
+
+    <main id="app">
+        <div id="page-content" class="content-fade">
+            <div class="glass-panel">
+                <h1 data-lang="rand_num_title">Рандомайзер чисел</h1>
+                <p data-lang="rand_num_desc">Введите диапазон чисел:</p>
+                
+                <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px;">
+                    <input type="number" id="minNumber" data-lang-placeholder="placeholder_min" placeholder="Мин. значение" style="padding: 10px; border-radius: 8px; border: 1px solid var(--border); background: rgba(0,0,0,0.2); color: white;">
+                    <input type="number" id="maxNumber" data-lang-placeholder="placeholder_max" placeholder="Макс. значение" style="padding: 10px; border-radius: 8px; border: 1px solid var(--border); background: rgba(0,0,0,0.2); color: white;">
+                    <button class="btn-back" data-lang="btn_generate" onclick="randomizeNumbers()">Сгенерировать</button>
+                </div>
+                
+                <div id="randomNumber" style="font-size: 1.5rem; font-weight: 800; color: var(--accent); margin-bottom: 40px;">
+                    <span data-lang="result_label">Случайное число:</span> 
+                </div>
+                
+                <hr style="border: 0; border-top: 1px solid var(--border); margin: 30px 0;">
+                
+                <h1 data-lang="rand_list_title">Рандомайзер из списка</h1>
+                <p data-lang="rand_list_desc">Введите варианты (каждый с новой строки):</p>
+                
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+                    <textarea id="inputList" rows="5" data-lang-placeholder="placeholder_list" placeholder="Вариант 1&#10;Вариант 2" style="padding: 10px; border-radius: 8px; border: 1px solid var(--border); background: rgba(0,0,0,0.2); color: white; resize: none;"></textarea>
+                    <input type="number" id="attempts" value="1" data-lang-placeholder="placeholder_attempts" placeholder="Количество попыток" style="padding: 10px; border-radius: 8px; border: 1px solid var(--border); background: rgba(0,0,0,0.2); color: white;">
+                    <button class="btn-back" data-lang="btn_pick" onclick="randomizeFromList()">Выбрать вариант</button>
+                </div>
+                
+                <div id="randomListItem" style="margin-top: 20px; color: var(--text);"></div>
+                <div id="retryList"></div>
+            </div>
+        </div>
+    </main>
+
+    <script src="/assets/script.js"></script>
+</body>
+</html>

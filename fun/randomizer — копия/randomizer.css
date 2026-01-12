@@ -1,0 +1,68 @@
+/* Стили для форм внутри стеклянной панели */
+.glass-panel input, 
+.glass-panel textarea {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 12px;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    margin-bottom: 15px;
+    outline: none;
+    transition: 0.3s;
+}
+
+.glass-panel input:focus, 
+.glass-panel textarea:focus {
+    border-color: var(--accent);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.glass-panel h1 {
+    margin-bottom: 10px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.glass-panel p {
+    margin-bottom: 20px;
+    color: var(--text);
+    font-size: 14px;
+}
+
+.result-container {
+    margin-top: 20px;
+    padding: 15px;
+    background: rgba(138, 43, 226, 0.1);
+    border-radius: 12px;
+    min-height: 50px;
+    line-height: 1.6;
+}
+
+.btn-action {
+    display: inline-block;
+    padding: 12px 25px;
+    background: var(--purple);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s;
+    margin: 5px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.btn-action:hover {
+    background: var(--accent);
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(255, 0, 255, 0.4);
+}
+
+.divider {
+    height: 1px;
+    background: var(--border);
+    margin: 40px 0;
+}

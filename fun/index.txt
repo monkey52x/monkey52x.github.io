@@ -1,0 +1,13 @@
+                    <a href="/fun/ball-of-fate/" data-link class="mini-card">
+                        <span data-lang="fun_ball">Ball of Fate</span>
+                        <div class="icon-box">
+                            <img src="/assets/images/Ball_of_fate.png" alt="Ball of Fate">
+                        </div>
+                    </a>
+
+                    <a href="/fun/heads-tails/" data-link class="mini-card">
+                        <span data-lang="fun_coin">Heads or Tails</span>
+                        <div class="icon-box">
+                            <img src="/assets/images/Heads_or_tails.png" alt="Heads or Tails">
+                        </div>
+                    </a>

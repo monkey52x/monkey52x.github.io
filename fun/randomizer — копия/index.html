@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8"><title>X😘WW</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="background-overlay"></div>
+    <main id="app">
+        <div id="page-content" class="content-fade">
+            <div class="glass-panel">
+				<h1 style="color: white;">Рандомайзер чисел</h1>
+				<p style="color: white;">Введите диапазон чисел:</p>
+				<input type="number" id="minNumber" placeholder="Минимальное значение">
+				<input type="number" id="maxNumber" placeholder="Максимальное значение">
+				<button onclick="randomizeNumbers()">Сгенерировать число</button>
+				<div id="randomNumber" style="color: white;"></div>
+				<div id="retryNumbers"></div>
+				
+				<h1 style="color: white;">Рандомайзер из списка</h1>
+				<p style="color: white;">Введите варианты, каждый с новой строки:</p>
+				<textarea id="inputList" rows="4" placeholder="Введите варианты"></textarea>
+				<input type="number" id="attempts" placeholder="Количество попыток">
+				<button onclick="randomizeFromList()">Выбрать вариант</button>
+				<div id="randomListItem" style="color: white;"></div>
+				<div id="retryList"></div>
+            </div>
+        </div>
+    </main>
+    <script src="/script.js"></script>
+	<script src="/fun/randomizer/randomizer.js"></script>
+</body>
+</html>
