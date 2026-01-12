@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&display=swap');
 
 :root {
-    --bg: #0a0a0f; /* Сделал чуть темнее для стабильности */
+    --bg: #0a0a0f;
     --purple: #8a2be2;
     --accent: #ff00ff;
     --text: #e0e0e0;
@@ -15,6 +15,8 @@ body {
     color: white;
     font-family: 'Montserrat', sans-serif;
     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
     overflow-x: hidden;
 }
 
@@ -25,16 +27,27 @@ body {
     z-index: -1;
 }
 
+/* --- ШАПКА (HEADER) --- */
 header {
-    background: rgba(10, 10, 15, 0.95); /* Усилил плотность фона */
+    background: rgba(10, 10, 15, 0.95);
     backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
     border-bottom: 1px solid var(--border);
     padding: 15px 8%;
     position: sticky;
-    top: 0; z-index: 1000;
+    top: 0; 
+    z-index: 1000;
+    width: 100%;
+    display: block;
 }
 
-nav { display: flex; justify-content: space-between; align-items: center; }
+nav { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    max-width: 1400px; 
+    margin: 0 auto;
+}
 
 .logo { font-size: 24px; font-weight: 900; letter-spacing: 3px; text-shadow: 0 0 15px var(--purple); }
 .logo a { color: inherit; text-decoration: none; }
@@ -45,7 +58,7 @@ nav { display: flex; justify-content: space-between; align-items: center; }
 .nav-links a { text-decoration: none; color: var(--text); font-size: 14px; font-weight: 600; transition: 0.3s; }
 .nav-links a:hover { color: var(--accent); text-shadow: 0 0 8px var(--accent); }
 
-/* Исправленный выбор языка */
+/* --- ВЫБОР ЯЗЫКА --- */
 .lang-dropdown { position: relative; }
 .lang-btn {
     background: rgba(255,255,255,0.05); border: 1px solid var(--border);
@@ -61,14 +74,25 @@ nav { display: flex; justify-content: space-between; align-items: center; }
 .lang-options span { display: block; padding: 12px; cursor: pointer; text-align: center; transition: 0.2s; }
 .lang-options span:hover { background: var(--purple); }
 
-/* --- ОЖИВЛЕННЫЙ КОНТЕЙНЕР --- */
+/* --- ЦЕНТРИРОВКА КОНТЕНТА --- */
+#app { flex: 1; display: flex; flex-direction: column; }
+
+#page-content { 
+    flex: 1; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    padding: 40px 20px; 
+}
+
+/* --- ГЛАВНАЯ СТРАНИЦА (ОЖИВЛЕННАЯ ЛОГИКА) --- */
 .home-container {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
+    gap: 60px;
+    flex-wrap: wrap;
     max-width: 1200px;
-    margin: 100px auto;
-    padding: 0 50px;
 }
 
 .side-group { display: flex; gap: 50px; }
@@ -88,20 +112,20 @@ nav { display: flex; justify-content: space-between; align-items: center; }
     transition: 0.3s;
 }
 
-/* Рамка иконки стала больше и активнее */
 .icon-box {
     width: 170px; height: 170px;
     border: 2px solid rgba(255,255,255,0.2);
     border-radius: 30px;
-    padding: 10px; /* Уменьшил padding, чтобы картинка внутри была больше */
+    padding: 10px;
     display: flex; align-items: center; justify-content: center;
     background: rgba(255, 255, 255, 0.03);
     position: relative;
     overflow: hidden;
     transition: 0.4s;
+    /* Плавающая анимация из твоего примера */
+    animation: float 4s ease-in-out infinite; 
 }
 
-/* Сама картинка внутри стала крупнее */
 .icon-box img {
     width: 85%; height: 85%;
     object-fit: contain;
@@ -109,26 +133,82 @@ nav { display: flex; justify-content: space-between; align-items: center; }
     filter: drop-shadow(0 5px 15px rgba(0,0,0,0.5));
 }
 
-/* --- АНИМАЦИИ --- */
+/* --- ЭФФЕКТЫ ПРИ НАВЕДЕНИИ (ЛУЧШАЯ ВЕРСИЯ) --- */
 .mini-card:hover { transform: translateY(-15px); }
+
 .mini-card:hover .icon-box {
     border-color: var(--accent);
     background: rgba(138, 43, 226, 0.1);
-    box-shadow: 0 0 40px rgba(255, 0, 255, 0.2);
+    box-shadow: 0 0 40px rgba(255, 0, 255, 0.2); /* То самое свечение */
 }
-.mini-card:hover img { transform: scale(1.1) rotate(3deg); }
-.mini-card:hover span { color: var(--accent); }
 
-/* Плавающая анимация для всех иконок */
+.mini-card:hover img { 
+    transform: scale(1.1) rotate(3deg); /* Вращение из твоего примера */
+}
+
+.mini-card:hover span { 
+    color: var(--accent); 
+    text-shadow: 0 0 10px var(--accent);
+}
+
+/* Задержки анимаций для "живого" эффекта */
+.mini-card:nth-child(2) .icon-box { animation-delay: 1s; }
+.mini-card:nth-child(3) .icon-box { animation-delay: 2s; }
+
+/* --- ВНУТРЕННИЕ СТРАНИЦЫ (GLASS PANEL) --- */
+.container { width: 100%; display: flex; justify-content: center; }
+
+.glass-panel {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border: 1px solid var(--border);
+    border-radius: 40px;
+    padding: 60px;
+    width: 100%;
+    max-width: 800px;
+    text-align: center;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+}
+
+.glass-panel h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    margin-bottom: 25px;
+    background: linear-gradient(to right, #fff, var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-transform: uppercase;
+}
+
+.btn-back {
+    display: inline-block;
+    padding: 12px 35px;
+    background: var(--purple);
+    color: white;
+    border-radius: 12px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: 0.3s;
+    margin-top: 20px;
+}
+.btn-back:hover { background: var(--accent); transform: scale(1.05); }
+
+/* --- ГЛОБАЛЬНЫЕ АНИМАЦИИ --- */
 @keyframes float {
     0% { transform: translateY(0px); }
     50% { transform: translateY(-10px); }
     100% { transform: translateY(0px); }
 }
-.icon-box { animation: float 4s ease-in-out infinite; }
-.mini-card:nth-child(2) .icon-box { animation-delay: 1s; }
-.mini-card:nth-child(3) .icon-box { animation-delay: 2s; }
 
-/* Плавный вход страницы */
-.content-fade { animation: fadeIn 0.8s ease-out; }
-@keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+.content-fade { animation: fadeIn 0.8s ease-out; width: 100%; }
+
+@keyframes fadeIn { 
+    from { opacity: 0; transform: scale(0.95); } 
+    to { opacity: 1; transform: scale(1); } 
+}
+
+/* Адаптивность */
+@media (max-width: 900px) {
+    .home-container { gap: 30px; }
+    .side-group { flex-direction: column; gap: 30px; }
+}
