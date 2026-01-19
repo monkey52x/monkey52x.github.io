@@ -1,86 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Рандомайзеры</title>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-    }
-    .container {
-        max-width: 600px;
-        margin: 0 auto;
-        text-align: center;
-    }
-    button {
-        margin-top: 20px;
-        padding: 10px 20px;
-        font-size: 16px;
-        cursor: pointer;
-    }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>X😘WW | Рандомайзер</title>
+    <link rel="icon" type="image/png" href="/assets/favicon.png">
+    <link rel="stylesheet" href="/assets/style.css"> 
 </head>
 <body>
-<div class="container">
-    <h1 style="color: white;">Рандомайзер чисел</h1>
-    <p style="color: white;">Введите диапазон чисел:</p>
-    <input type="number" id="minNumber" placeholder="Минимальное значение">
-    <input type="number" id="maxNumber" placeholder="Максимальное значение">
-    <button onclick="randomizeNumbers()">Сгенерировать число</button>
-    <div id="randomNumber" style="color: white;"></div>
-    <div id="retryNumbers"></div>
+    <div class="background-overlay"></div>
 
-    <h1 style="color: white;">Рандомайзер из списка</h1>
-    <p style="color: white;">Введите варианты, каждый с новой строки:</p>
-    <textarea id="inputList" rows="4" placeholder="Введите варианты"></textarea>
-    <input type="number" id="attempts" placeholder="Количество попыток">
-    <button onclick="randomizeFromList()">Выбрать вариант</button>
-    <div id="randomListItem" style="color: white;"></div>
-    <div id="retryList"></div>
-</div>
+    <header></header>
 
-<script>
-    function randomizeNumbers() {
-        var min = parseInt(document.getElementById("minNumber").value);
-        var max = parseInt(document.getElementById("maxNumber").value);
-        var randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
-        document.getElementById("randomNumber").innerText = "Случайное число: " + randomNumber;
-        document.getElementById("retryNumbers").innerHTML = "<button onclick='retryNumbers()'>Повторить</button>";
-    }
+    <main id="app">
+        <div id="page-content" class="content-fade">
+            <div class="glass-panel">
+                
+                <h1 data-lang="rand_num_title" style="color: white; margin-bottom: 10px;">Рандомайзер чисел</h1>
+                <p style="color: rgba(255,255,255,0.7); margin-bottom: 20px;">Введите диапазон чисел:</p>
+                
+                <div style="display: flex; flex-direction: column; gap: 15px; max-width: 300px; margin: 0 auto 25px;">
+                    <input type="number" id="minNumber" placeholder="Мин. значение" style="padding: 12px; border-radius: 10px; border: 1px solid var(--border); background: rgba(0,0,0,0.3); color: white;">
+                    <input type="number" id="maxNumber" placeholder="Макс. значение" style="padding: 12px; border-radius: 10px; border: 1px solid var(--border); background: rgba(0,0,0,0.3); color: white;">
+                    <button class="btn-back" onclick="randomizeNumbers()">Сгенерировать</button>
+                </div>
+                
+                <div id="randomNumber" style="font-size: 1.5rem; font-weight: 800; color: var(--accent); margin-bottom: 40px;">
+                    Случайное число: —
+                </div>
 
-    function retryNumbers() {
-        randomizeNumbers();
-    }
+                <hr style="border: 0; border-top: 1px solid var(--border); margin: 40px 0;">
 
-    function randomizeFromList() {
-        var inputList = document.getElementById("inputList").value.trim().split("\n");
-        var attempts = parseInt(document.getElementById("attempts").value);
-        var count = {};
-        
-        for (var i = 0; i < inputList.length; i++) {
-            count[inputList[i]] = 0;
-        }
+                <h1 data-lang="rand_list_title" style="color: white; margin-bottom: 10px;">Рандомайзер из списка</h1>
+                <p style="color: rgba(255,255,255,0.7); margin-bottom: 20px;">Введите варианты (каждый с новой строки):</p>
+                
+                <div style="display: flex; flex-direction: column; gap: 15px; max-width: 400px; margin: 0 auto;">
+                    <textarea id="inputList" rows="5" placeholder="Вариант 1&#10;Вариант 2" style="padding: 12px; border-radius: 10px; border: 1px solid var(--border); background: rgba(0,0,0,0.3); color: white; resize: none;"></textarea>
+                    <input type="number" id="attempts" value="1" placeholder="Количество попыток" style="padding: 12px; border-radius: 10px; border: 1px solid var(--border); background: rgba(0,0,0,0.3); color: white;">
+                    <button class="btn-back" onclick="randomizeFromList()">Выбрать случайный вариант</button>
+                </div>
+                
+                <div id="randomListItem" style="margin-top: 25px; color: var(--text); line-height: 1.6;">
+                    Результат: —
+                </div>
 
-        for (var j = 0; j < attempts; j++) {
-            var randomIndex = Math.floor(Math.random() * inputList.length);
-            var selectedItem = inputList[randomIndex].trim();
-            count[selectedItem]++;
-        }
+            </div>
+        </div>
+    </main>
 
-        var result = "";
-        for (var key in count) {
-            var percentage = (count[key] / attempts) * 100;
-            result += key + ": " + count[key] + " (" + percentage.toFixed(2) + "%)<br>";
-        }
-
-        document.getElementById("randomListItem").innerHTML = result;
-        document.getElementById("retryList").innerHTML = "<button onclick='retryList()'>Повторить</button>";
-    }
-
-    function retryList() {
-        randomizeFromList();
-    }
-</script>
+    <script src="/assets/script.js"></script>
 </body>
 </html>
