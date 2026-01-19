@@ -58,7 +58,7 @@ nav {
     display: flex; 
     align-items: flex-start; 
     justify-content: center; 
-    padding: 120px 20px; /* Опустили плитки ниже */
+    padding: 20px 20px; /* Опустили плитки ниже */
 }
 
 /* --- HOME GRID (АДАПТИВНЫЙ РАЗБРОС) --- */
